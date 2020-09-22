@@ -40,7 +40,7 @@ function App() {
         y: -30,
         ease: 'power3.inOut',
         stagger: {
-          amount: 0.6
+          amount: 0.8
         }
       }
     );
@@ -50,7 +50,7 @@ function App() {
     <Header />
     <div className="container">
       {routes.map(({ path, Component }) => (
-        <Route key='name' path={path} exact>
+        <Route key={path} path={path} exact>
           {({ match }) => (
             <CSSTransition
               in={match != null}
