@@ -2,6 +2,8 @@
 import React from 'react';
 import './App.scss';
 import { Route } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
+import { gsap } from 'gsap';
 
 import About from './pages/about';
 import Home from './pages/home';
@@ -18,9 +20,17 @@ function App() {
     <div className="container">
       {routes.map(({ path, Component }) => (
         <Route key='name' path={path} exact>
-          <div className="page">
-            <Component />
-          </div>
+          {({ match }) => (
+            <CSSTransition
+              in={match != null}
+              timeout={1200}
+              classNames='page'
+              unmountOnExit>
+              <div className="page">
+                <Component />
+              </div>
+            </CSSTransition>
+          )}
         </Route>
       ))}
     </div>
