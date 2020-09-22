@@ -15,6 +15,37 @@ const routes = [
 ];
 
 function App() {
+
+  const onEnter = node => {
+    // Enter animation
+    gsap.from(
+      [node.children[0].firstElementChild, node.children[0].lastElementChild], .6,
+      {
+        y: 30,
+        delay: 0.6,
+        ease: 'power3.inOut',
+        opacity: 0,
+        stagger: {
+          amount: 0.6
+        }
+      }
+    );
+  };
+
+  const onExit = node => {
+    // Exit animation
+    gsap.to(
+      [node.children[0].firstElementChild, node.children[0].lastElementChild], .6,
+      {
+        y: -30,
+        ease: 'power3.inOut',
+        stagger: {
+          amount: 0.6
+        }
+      }
+    );
+  }
+
   return <>
     <Header />
     <div className="container">
@@ -25,7 +56,9 @@ function App() {
               in={match != null}
               timeout={1200}
               classNames='page'
-              unmountOnExit>
+              unmountOnExit
+              onExit={onExit}
+              onEnter={onEnter}>
               <div className="page">
                 <Component />
               </div>
